@@ -22,3 +22,5 @@ else
   # rubocop requires ruby >= 1.9
   gem 'rubocop'
 end
+
+gem 'coveralls', require: false
