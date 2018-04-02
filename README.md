@@ -41,6 +41,7 @@ To configure NetData as a Slave
 class {'::netdata':
   master => 'netdata-master.example.com',
 }
+```
 
 To configure NetData as a Master
 ```ruby

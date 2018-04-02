@@ -11,8 +11,7 @@
     {"name":"puppetlabs-stdlib","version_requirement":">= 4.25.0"},
     {"name":"puppetlabs-concat","version_requirement":">= 4.2.1"},
     {"name":"puppetlabs-vcsrepo","version_requirement":">= 2.3.0"},
-    {"name":"puppetlabs-apt","version_requirement":">= 4.5.1"},
-    {"name":"puppet-systemd","version_requirement":">= 1.1.1"}
+    {"name":"puppetlabs-apt","version_requirement":">= 4.5.1"}
   ],
   "operatingsystem_support": [
     {
