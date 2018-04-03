@@ -13,13 +13,15 @@
 1. [Setup - The basics of getting started with netdata](#setup)
     * [Setup requirements](#setup-requirements)
     * [Beginning with netdata](#beginning-with-netdata)
-1. [Usage - Configuration options and additional functionality](#usage)
+1. [Usage](#usage)
+    * [Advanced usage](#advanced-use-cases)
+    * [Parameters](#parameters)
 1. [Limitations - OS compatibility, etc.](#limitations)
 1. [Development - Guide for contributing to the module](#development)
 
 ## Description
 
-This module deploys and configured netdata. More can be found on netdata at (https://github.com/firehol/netdata). 
+This module deploys and configures netdata. More can be found on netdata at [firehol/netdata](https://github.com/firehol/netdata). 
 
 ## Setup
 
@@ -79,7 +81,7 @@ netdata::stream {'9a83b18a-5cdb-4baf-8958-ad291ab781d3': }
 
    Type:    String
    Default: 0x00000000
-   Desc:    Debug Flags (see https://github.com/firehol/netdata/wiki/Tracing-Options)
+   Desc:    Debug Flags. See [more info](see https://github.com/firehol/netdata/wiki/Tracing-Options).
 
  * `debug_logfile`
 
@@ -169,7 +171,7 @@ netdata::stream {'9a83b18a-5cdb-4baf-8958-ad291ab781d3': }
 
    Type:    String
    Default: undef
-   Desc:    A central netdata that is configured with `isregistry`.
+   Desc:    A central netdata that is configured with `registry => true`.
 
  * `remote_registry_port`
 
@@ -185,3 +187,5 @@ This module is tested with CentOS 6 and 7, Ubunu LTS 14.04, 16.04, and 18.04. Th
 
 This module is currently maintained by Denver McAnally (denver.mcanally@gmail.com). Please feel free to contribute. When doing so, please be sure to provide appropriate test coverage.
 Please see puppetlabs [contribution guide](https://docs.puppetlabs.com/forge/contributing.html) for more information. 
+
+Netdata is developed and maintained at [firehol/netdata](https://github.com/firehol/netdata).
