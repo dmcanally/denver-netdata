@@ -14,10 +14,11 @@ describe 'netdata' do
 
       let(:params) do
         {
+          :registry => true,
         }.merge(overridden_params)
       end
 
-      describe "apply netdata on #{os}" do
+      describe "netdata is registry on #{os}" do
         let(:overridden_params) do {
         } end
 

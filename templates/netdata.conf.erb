@@ -1,0 +1,49 @@
+# THIS FILE IS PUPPET CONTROLLED, ANY CHANGES WILL BE OVERWRITTEN
+#
+# netdata configuration
+
+# global netdata configuration
+
+[global]
+  hostname = <%= @fqdn %>
+  history = <%= @history %>
+  update every = <%= @update_every %>
+
+  config directory = <%= @config_dir %>
+  log directory = <%= @log_dir %>
+  plugins directory = <%= @plugins_dir %>
+  web files directory = <%= @web_files_dir %>
+  cache directory = <%= @cache_dir %>
+
+  memory mode = <%= @memory_mode %>
+<% if !@memory_dedup -%>
+  memory deduplication (ksm) = no
+<% end -%>
+
+  debug flags = <%= @debug_flags %>
+  debug log = <%= @debug_log %>
+  error log = <%= @error_log %>
+  access log = <%= @access_log %>
+
+  web files user = <%= @web_user %>
+  web files group = <%= @web_group %>
+  run as user = <%= @user %>
+  default port = <%= @port %>
+  bind to = <%= @bind_to %>
+
+# web configuration
+
+[web]
+  mode = <%= @web_mode %>
+
+# registry configuration
+
+[registry]
+<% if @isregistry -%>
+  enabled = yes
+  allow from = <%= @registry_allowfrom %>
+<% end -%>
+<% if @remote_registry -%>
+  registry to announce = http://<%= @remote_registry %>:<%= @remote_registry_port %>
+  registry hostname = <% if @registry_group %><%= @registry_group %>: <% end %><%= @hostname %>
+<% end -%>

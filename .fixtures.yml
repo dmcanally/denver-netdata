@@ -1,9 +1,6 @@
 fixtures:
   repositories:
     stdlib:        'https://github.com/puppetlabs/puppetlabs-stdlib.git'
-    systemd:       'https://github.com/camptocamp/puppet-systemd'
-    concat:        'https://github.com/puppetlabs/puppetlabs-concat'
-    vcsrepo:       'https://github.com/puppetlabs/puppetlabs-vcsrepo.git'
-    apt:           'https://github.com/puppetlabs/puppetlabs-apt.git'
+    concat:        'https://github.com/puppetlabs/puppetlabs-concat.git'
   symlinks:
-    base: "#{source_dir}"
+    netdata: "#{source_dir}"
