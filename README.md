@@ -71,4 +71,4 @@ This module is tested with CentOS 6 and 7, Ubunu LTS 14.04, 16.04, and 18.04. Th
 ## Development
 
 This module is currently maintained by Denver McAnally (denver.mcanally@gmail.com). Please feel free to contribute. When doing so, please be sure to provide appropriate test coverage.
-Please see puppetlabs [contrinution guide](https://docs.puppetlabs.com/forge/contributing.html) for more information. 
+Please see puppetlabs [contribution guide](https://docs.puppetlabs.com/forge/contributing.html) for more information. 
