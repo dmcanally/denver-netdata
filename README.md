@@ -37,10 +37,10 @@ class {'::netdata': }
 ## Usage
 
 ### Advanced use cases
-To configure netdata as a Slave
+To configure netdata as a Slave. Note, the GUID displayed here is just an example.
 ```puppet
 class {'::netdata':
-  remote_master   => 'netdata-master.example.com',
+  remote_master        => 'netdata-master.example.com',
   remote_master_apikey => '9a83b18a-5cdb-4baf-8958-ad291ab781d3',
 }
 ```
@@ -50,15 +50,17 @@ To configure netdata as a Master
 class {'::netdata':
   master => true,
 }
-
+```
+In order for netdata metrics to stream to a master, you must define a netdata stream API key. You can generate a GUID with uuidgen. More information can be found on netdata replication [here](https://github.com/firehol/netdata/wiki/Replication-Overview).
+```puppet
 netdata::stream {'9a83b18a-5cdb-4baf-8958-ad291ab781d3': }
 ```
 
 To configure netdata as a Proxy
 ```puppet
 class {'::netdata':
-  master          => true,
-  remote_master   => 'netdata-master.example.com',
+  master               => true,
+  remote_master        => 'netdata-master.example.com',
   remote_master_apikey => '9a83b18a-5cdb-4baf-8958-ad291ab781d3',
 }
 
@@ -66,12 +68,6 @@ netdata::stream {'9a83b18a-5cdb-4baf-8958-ad291ab781d3': }
 ```
 
 ### Parameters
-
- * `hostname`
-
-   Type:    String
-   Default: $::fqdn
-   Desc:    The hostname of the computer running netdata.
 
  * `history`
 
@@ -197,7 +193,7 @@ netdata::stream {'9a83b18a-5cdb-4baf-8958-ad291ab781d3': }
 
    Type:    String
    Default: undef
-   Desc:    This sets the API Key for talking to an upstream netdata. This must be a GUID.
+   Desc:    This sets the API Key for talking to an upstream netdata. This must be a GUID. A netdata master must have a matching GUID defined with netdata::stream.
 
  * `registry`
 
