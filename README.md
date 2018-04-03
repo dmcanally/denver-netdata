@@ -75,53 +75,11 @@ netdata::stream {'9a83b18a-5cdb-4baf-8958-ad291ab781d3': }
    Default: 3600
    Desc:    The number of entries the netdata daemon will by default keep in memory for each chart dimension. 
 
- * `install_dir`
-
-   Type:    String
-   Default: /opt/netdata
-   Desc:    Path in which to deploy netdata locally.
-
- * `config_dir`
-
-   Type:    String
-   Default: $::netdata::install_dir/etc/netdata
-   Desc:    Configuration directory.
-
- * `plugins_dir`
-
-   Type:    String
-   Default: $::netdata::install_dir/usr/libexec/netdata/plugins.d
-   Desc:    Plugins directory.
-
- * `web_files_dir`
-
-   Type:    String
-   Default: $::netdata::install_dir/usr/share/netdata/web
-   Desc:    Web files directory.
-
- * `cache_dir`
-
-   Type:    String
-   Default: $::netdata::install_dir/var/cache/netdata
-   Desc:    Cache directory.
-
- * `log_dir`
-
-   Type:    String
-   Default: $::netdata::install_dir/var/log/netdata
-   Desc:    Log directory.
-
  * `debug_flags`
 
    Type:    String
    Default: 0x00000000
    Desc:    Debug Flags (see https://github.com/firehol/netdata/wiki/Tracing-Options)
-
- * `memory_dedup`
-
-   Type:    Boolean
-   Default: true
-   Desc:    When true, netdata offers its memory for KMS deduplication.
 
  * `debug_logfile`
 
