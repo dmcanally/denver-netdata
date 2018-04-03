@@ -26,27 +26,27 @@
 #
 # * `config_dir`
 #   Type:    String
-#   Default: /etc/netdata
+#   Default: $::netdata::install_dir/etc/netdata
 #   Desc:    Configuration directory.
 #
 # * `plugins_dir`
 #   Type:    String
-#   Default: /usr/libexec/netdata/plugins.d
+#   Default: $::netdata::install_dir/usr/libexec/netdata/plugins.d
 #   Desc:    Plugins directory.
 #
 # * `web_files_dir`
 #   Type:    String
-#   Default: /usr/share/netdata/web
+#   Default: $::netdata::install_dir/usr/share/netdata/web
 #   Desc:    Web files directory.
 #
 # * `cache_dir`
 #   Type:    String
-#   Default: /var/cache/netdata
+#   Default: $::netdata::install_dir/var/cache/netdata
 #   Desc:    Cache directory.
 #
 # * `log_dir`
 #   Type:    String
-#   Default: /var/log/netdata
+#   Default: $::netdata::install_dir/var/log/netdata
 #   Desc:    Log directory.
 #
 # * `debug_flags`
@@ -61,17 +61,17 @@
 #
 # * `debug_logfile`
 #   Type:    String
-#   Default: /var/log/netdata/debug.log
+#   Default: debug.log
 #   Desc:    Debug log file
 #
 # * `error_logfile`
 #   Type:    String
-#   Default: /var/log/netdata/error.log
+#   Default: error.log
 #   Desc:    Error log file
 #
 # * `access_logfile`
 #   Type:    String
-#   Default: /var/log/netdata/access.log
+#   Default: access.log
 #   Desc:    Access Log File
 #
 # * `memory_mode`
@@ -124,7 +124,7 @@
 #   Default: 60
 #   Desc:    The time in seconds to disconnect web clients after being totally idle.
 #
-# * `ismaster`
+# * `master`
 #   Type:    Boolean
 #   Default: false
 #   Desc:    Set this to true for netdata to act as a master.
@@ -144,36 +144,25 @@
 #   Default: undef
 #   Desc:    This sets the API Key for talking to an upstream netdata. This must be a GUID.
 #
-# * `isregistry`
+# * `registry`
 #   Type:    Boolean
 #   Default: false
 #   Desc:    Set to true in order for a netdata to act as a registry.
-#
-# * `remote_registry`
-#   Type:    String
-#   Default: undef
-#   Desc:    A central netdata that is configured with `isregistry`.
-#
-# * `isregistry`
-#   Type:    Boolean
-#   Default: false
-#   Desc:    Setting this to true allows netdata to act as a central registry.
-#
-# * `remote_registry`
-#   Type:    String
-#   Default: undef
-#   Desc:    Hostname or IPv4 address of a remote netdata acting as a central registry.
-#
-# * `remote_registry_port`
-#   Type:    Integer
-#   Default: 19999
-#   Desc:    Port configured on the remote registry.
 #
 # * `registry_allowgroup`
 #   Type:    String
 #   Default: '*'
 #   Desc:    List of subnets allowed to register.
 #
+# * `remote_registry`
+#   Type:    String
+#   Default: undef
+#   Desc:    A central netdata that is configured with `isregistry`.
+#
+# * `remote_registry_port`
+#   Type:    Integer
+#   Default: 19999
+#   Desc:    Port configured on the remote registry.
 #
 # Examples
 # --------
@@ -182,7 +171,7 @@
 #    class { '::netdata': }
 #
 # @master example
-#    class { '::netdata': ismaster => true }
+#    class { '::netdata': master => true }
 #
 # @slave example
 #    class { '::netdata': master => 'netdata-master.example.com' }
@@ -226,8 +215,8 @@ class netdata (
   Optional[String]                                $remote_master        = undef,
   Optional[Integer]                               $remote_master_port   = 19999,
   Optional[String]                                $remote_master_apikey = undef,
-  Boolean                                         $ismaster             = false,
-  Boolean                                         $isregistry           = false,
+  Boolean                                         $master               = false,
+  Boolean                                         $registry             = false,
   Optional[String]                                $remote_registry      = undef,
   Optional[Integer]                               $remote_registry_port = 19999,
   Optional[String]                                $registry_group       = undef,

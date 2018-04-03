@@ -28,7 +28,8 @@ class netdata::config {
   $remote_master        = $::netdata::remote_master
   $remote_master_port   = $::netdata::remote_master_port
   $remote_master_apikey = $::netdata::remote_master_apikey
-  $isregistry           = $::netdata::isregistry
+  $registry             = $::netdata::registry
+  $master               = $::netdata::master
   $remote_registry      = $::netdata::remote_registry
   $remote_registry_port = $::netdata::remote_registry_port
   $registry_group       = $::netdata::registry_group

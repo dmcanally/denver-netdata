@@ -14,7 +14,7 @@ describe 'netdata' do
 
       let(:params) do
         {
-          :ismaster => true,
+          :master => true,
         }.merge(overridden_params)
       end
 

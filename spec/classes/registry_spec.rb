@@ -14,7 +14,7 @@ describe 'netdata' do
 
       let(:params) do
         {
-          :isregistry => true,
+          :registry => true,
         }.merge(overridden_params)
       end
 

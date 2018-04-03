@@ -6,7 +6,7 @@ describe 'Simple installation' do
     <<-EOS
 
     class { '::netdata': 
-      ismaster => true,
+      master => true,
     }
 
     netdata::stream {'9a83b18a-5cdb-4baf-8958-ad291ab781d3': }

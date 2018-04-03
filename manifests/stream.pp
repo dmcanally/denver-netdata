@@ -1,10 +1,10 @@
 #class netdata::stream
 define netdata::stream (
-  String  $apikey        = $name,
-  Integer $history       = 3600,
-  String  $memory_mode   = 'save',
-  String  $health_enable = 'auto',
-  String  $allow_from    = '*',
+  String                            $apikey        = $name,
+  Integer                           $history       = 3600,
+  Enum['save', 'map', 'ram','none'] $memory_mode   = 'save',
+  String                            $health_enable = 'auto',
+  String                            $allow_from    = '*',
 ) {
 
   concat::fragment { "stream.conf+10_${apikey}":

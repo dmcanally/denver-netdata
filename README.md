@@ -39,30 +39,29 @@ class {'::netdata': }
 To configure netdata as a Slave
 ```ruby
 class {'::netdata':
-  master => 'netdata-master.example.com',
+  remote_master   => 'netdata-master.example.com',
+  remote_master_apikey => '9a83b18a-5cdb-4baf-8958-ad291ab781d3',
 }
 ```
 
 To configure netdata as a Master
 ```ruby
 class {'::netdata':
-  ismaster => true,
+  master => true,
 }
 
-class {'::netdata::stream':
-  apikey => 'SOME-GUID',
-}
-
+netdata::stream {'9a83b18a-5cdb-4baf-8958-ad291ab781d3': }
 ```
 
 To configure netdata as a Proxy
 ```ruby
 class {'::netdata':
-  ismaster => true,
-  master   => 'netdata-master.example.com',
+  master          => true,
+  remote_master   => 'netdata-master.example.com',
+  remote_master_apikey => '9a83b18a-5cdb-4baf-8958-ad291ab781d3',
 }
 
-netdata::stream {'SOME-GUID': }
+netdata::stream {'9a83b18a-5cdb-4baf-8958-ad291ab781d3': }
 ```
 
 ## Limitations
