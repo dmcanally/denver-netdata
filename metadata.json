@@ -1,6 +1,6 @@
 {
   "name": "denver-netdata",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "denver.mcanally@gmail.com",
   "summary": "Deploys and Configures netdata",
   "license": "Apache-2.0",
