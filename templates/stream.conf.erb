@@ -1,0 +1,15 @@
+# THIS FILE IS PUPPET CONTROLLED, ANY CHANGES WILL BE OVERWRITTEN
+#
+# stream configuration
+<% if @remote_master -%>
+
+[stream]
+    enabled = yes
+    destination = <%= @remote_master %>:<%= @remote_master_port %>
+    api key = <%= @remote_master_apikey %>
+
+<% else -%>
+
+  enabled = no
+
+<% end -%>

@@ -5,7 +5,11 @@ describe 'Simple installation' do
   let(:pp) do
     <<-EOS
 
-    class { '::netdata': }
+    class { '::netdata': 
+      ismaster => true,
+    }
+
+    netdata::stream {'9a83b18a-5cdb-4baf-8958-ad291ab781d3': }
 
     EOS
   end

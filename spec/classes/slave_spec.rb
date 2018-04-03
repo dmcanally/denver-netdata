@@ -14,10 +14,13 @@ describe 'netdata' do
 
       let(:params) do
         {
+          :remote_master        => 'netdata-master.example.com',
+	  :remote_master_apikey => '9a83b18a-5cdb-4baf-8958-ad291ab781d3',
+	  :remote_registry      => 'netdata-master.example.com',
         }.merge(overridden_params)
       end
 
-      describe "apply netdata on #{os}" do
+      describe "netdata is slave on #{os}" do
         let(:overridden_params) do {
         } end
 

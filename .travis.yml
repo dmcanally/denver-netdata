@@ -1,6 +1,4 @@
 ---
-# This file is managed centrally by modulesync
-#   https://github.com/theforeman/foreman-installer-modulesync
 rvm:
   - 2.1.9
   - 2.2.6
@@ -9,6 +7,7 @@ rvm:
 env:
   matrix:
     - PUPPET_VERSION=4.9
+script: bundle exec rake test
 matrix:
   fast_finish: true
   include:

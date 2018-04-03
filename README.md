@@ -19,7 +19,7 @@
 
 ## Description
 
-This module deploys and configured NetData. More can be found on NetData at (https://github.com/firehol/netdata). 
+This module deploys and configured netdata. More can be found on netdata at (https://github.com/firehol/netdata). 
 
 ## Setup
 
@@ -29,33 +29,40 @@ This module requires you have a compatible OS and a functioning puppet infrastru
 
 ### Beginning with netdata
 
-To deploy and configure default NetData...
+To deploy and configure default netdata...
 ```ruby
 class {'::netdata': }
 ```
 
 ## Usage
 
-To configure NetData as a Slave
+To configure netdata as a Slave
 ```ruby
 class {'::netdata':
   master => 'netdata-master.example.com',
 }
 ```
 
-To configure NetData as a Master
+To configure netdata as a Master
 ```ruby
 class {'::netdata':
-  bemaster => true,
+  ismaster => true,
 }
+
+class {'::netdata::stream':
+  apikey => 'SOME-GUID',
+}
+
 ```
 
-To configure NetData as a Proxy
+To configure netdata as a Proxy
 ```ruby
 class {'::netdata':
-  beproxy => true,
-  master  => 'netdata-master.example.com',
+  ismaster => true,
+  master   => 'netdata-master.example.com',
 }
+
+netdata::stream {'SOME-GUID': }
 ```
 
 ## Limitations

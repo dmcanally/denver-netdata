@@ -14,10 +14,11 @@ describe 'netdata' do
 
       let(:params) do
         {
+          :ismaster => true,
         }.merge(overridden_params)
       end
 
-      describe "apply netdata on #{os}" do
+      describe "netdata as master on #{os}" do
         let(:overridden_params) do {
         } end
 
