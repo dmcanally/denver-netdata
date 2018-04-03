@@ -30,14 +30,15 @@ This module requires you have a compatible OS and a functioning puppet infrastru
 ### Beginning with netdata
 
 To deploy and configure default netdata...
-```ruby
+```puppet
 class {'::netdata': }
 ```
 
 ## Usage
 
+### Advanced use cases
 To configure netdata as a Slave
-```ruby
+```puppet
 class {'::netdata':
   remote_master   => 'netdata-master.example.com',
   remote_master_apikey => '9a83b18a-5cdb-4baf-8958-ad291ab781d3',
@@ -45,7 +46,7 @@ class {'::netdata':
 ```
 
 To configure netdata as a Master
-```ruby
+```puppet
 class {'::netdata':
   master => true,
 }
@@ -54,7 +55,7 @@ netdata::stream {'9a83b18a-5cdb-4baf-8958-ad291ab781d3': }
 ```
 
 To configure netdata as a Proxy
-```ruby
+```puppet
 class {'::netdata':
   master          => true,
   remote_master   => 'netdata-master.example.com',
@@ -63,6 +64,138 @@ class {'::netdata':
 
 netdata::stream {'9a83b18a-5cdb-4baf-8958-ad291ab781d3': }
 ```
+
+### Parameters
+
+ * `hostname`
+   Type:    String
+   Default: $::fqdn
+   Desc:    The hostname of the computer running netdata.
+
+ * `history`
+   Type:    Integer
+   Default: 3600
+   Desc:    The number of entries the netdata daemon will by default keep in memory for each chart dimension. 
+
+ * `install_dir`
+   Type:    String
+   Default: /opt/netdata
+   Desc:    Path in which to deploy netdata locally.
+
+ * `config_dir`
+   Type:    String
+   Default: $::netdata::install_dir/etc/netdata
+   Desc:    Configuration directory.
+
+ * `plugins_dir`
+   Type:    String
+   Default: $::netdata::install_dir/usr/libexec/netdata/plugins.d
+   Desc:    Plugins directory.
+
+ * `web_files_dir`
+   Type:    String
+   Default: $::netdata::install_dir/usr/share/netdata/web
+   Desc:    Web files directory.
+
+ * `cache_dir`
+   Type:    String
+   Default: $::netdata::install_dir/var/cache/netdata
+   Desc:    Cache directory.
+
+ * `log_dir`
+   Type:    String
+   Default: $::netdata::install_dir/var/log/netdata
+   Desc:    Log directory.
+
+ * `debug_flags`
+   Type:    String
+   Default: 0x00000000
+   Desc:    Debug Flags (see https://github.com/firehol/netdata/wiki/Tracing-Options)
+
+ * `memory_dedup`
+   Type:    Boolean
+   Default: true
+   Desc:    When true, netdata offers its memory for KMS deduplication.
+
+ * `debug_logfile`
+   Type:    String
+   Default: debug.log
+   Desc:    Debug log file
+
+ * `error_logfile`
+   Type:    String
+   Default: error.log
+   Desc:    Error log file
+
+ * `access_logfile`
+   Type:    String
+   Default: access.log
+   Desc:    Access Log File
+
+ * `memory_mode`
+   Type:    String
+   Default: save
+   Desc:    The mode for storing metrics. Options are save, map ram and none.
+
+ * `web_mode`
+   Type:    String
+   Default: multi-threaded
+   Desc:    Web UI mode, options are none, single-threaded and multi-threaded.
+
+ * `update_every`
+   Type:    Integer
+   Default: 1
+   Desc:    The frequency in seconds, for data collection.
+
+ * `port`
+   Type:    Integer
+   Default: 19999
+   Desc:    The default port to listen for web clients.
+
+ * `bind_to`
+   Type:    String
+   Default: *
+   Desc:    The IPv4 address and port to listen to.
+
+ * `master`
+   Type:    Boolean
+   Default: false
+   Desc:    Set this to true for netdata to act as a master.
+
+ * `remote_master`
+   Type:    String
+   Default: undef
+   Desc:    The Hostname of a remote netdata master.
+
+ * `remote_master_port`
+   Type:    Integer
+   Default: 19999
+   Desc:    Port for remote netdata master.
+
+ * `remote_master_apikey`
+   Type:    String
+   Default: undef
+   Desc:    This sets the API Key for talking to an upstream netdata. This must be a GUID.
+
+ * `registry`
+   Type:    Boolean
+   Default: false
+   Desc:    Set to true in order for a netdata to act as a registry.
+
+ * `registry_allowgroup`
+   Type:    String
+   Default: '*'
+   Desc:    List of subnets allowed to register.
+
+ * `remote_registry`
+   Type:    String
+   Default: undef
+   Desc:    A central netdata that is configured with `isregistry`.
+
+ * `remote_registry_port`
+   Type:    Integer
+   Default: 19999
+   Desc:    Port configured on the remote registry.
 
 ## Limitations
 
