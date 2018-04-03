@@ -1,12 +1,12 @@
 {
-  "name": "dmcanally-netdata",
+  "name": "denver-netdata",
   "version": "0.1.0",
   "author": "denver.mcanally@gmail.com",
   "summary": "Deploys and Configures netdata",
   "license": "Apache-2.0",
-  "source": "https://github.com/dmcanally/dmcanally-netdata",
-  "project_page": "https://github.com/dmcanally/dmcanally-netdata",
-  "issues_url": "https://https://github.com/dmcanally/dmcanally-netdata/issues",
+  "source": "https://github.com/dmcanally/denver-netdata",
+  "project_page": "https://github.com/dmcanally/denver-netdata",
+  "issues_url": "https://https://github.com/dmcanally/denver-netdata/issues",
   "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":">= 4.25.0"},
     {"name":"puppetlabs-concat","version_requirement":">= 4.2.1"}
@@ -23,8 +23,7 @@
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
         "14.04",
-        "16.04",
-	"18.04"
+        "16.04"
       ]
     }
   ]

@@ -1,10 +1,10 @@
-# dmcanally-netdata
+# denver-netdata
 
-[![Build Status](https://travis-ci.org/dmcanally/dmcanally-netdata.svg?branch=master)](https://travis-ci.org/dmcanally/dmcanally-netdata)
-[![Code Coverage](https://coveralls.io/repos/github/dmcanally/dmcanally-netdata/badge.svg?branch=master)](https://coveralls.io/github/dmcanally/dmcanally-netdata)
-[![Puppet Forge](https://img.shields.io/puppetforge/v/dmcanally/netdata.svg)](https://forge.puppetlabs.com/dmcanally/netdata)
-[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/dmcanally/netdata.svg)](https://forge.puppetlabs.com/dmcanally/netdata)
-[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/dmcanally/netdata.svg)](https://forge.puppetlabs.com/dmcanally/netdata)
+[![Build Status](https://travis-ci.org/dmcanally/denver-netdata.svg?branch=master)](https://travis-ci.org/dmcanally/denver-netdata)
+[![Code Coverage](https://coveralls.io/repos/github/dmcanally/denver-netdata/badge.svg?branch=master)](https://coveralls.io/github/dmcanally/denver-netdata)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/denver/netdata.svg)](https://forge.puppetlabs.com/denver/netdata)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/denver/netdata.svg)](https://forge.puppetlabs.com/denver/netdata)
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/denver/netdata.svg)](https://forge.puppetlabs.com/denver/netdata)
 
 
 #### Table of Contents
