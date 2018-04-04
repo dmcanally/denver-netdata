@@ -38,6 +38,7 @@ class netdata::config {
 
   File {
     ensure => $ensure,
+    backup => '.puppet-bak',
     owner  => $user,
     group  => $group,
     require => Class['::netdata::install'],

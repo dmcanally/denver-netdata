@@ -1,6 +1,6 @@
 require 'spec_helper_acceptance'
 
-describe 'Simple installation' do
+describe 'slave installation' do
 
   let(:pp) do
     <<-EOS

@@ -36,6 +36,11 @@ To deploy and configure default netdata...
 class {'::netdata': }
 ```
 
+To remove a deployed netdata...
+```puppet
+class {'::netdata': ensure => 'absent'}
+```
+
 ## Usage
 
 ### Advanced use cases

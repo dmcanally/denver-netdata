@@ -227,8 +227,12 @@ class netdata (
 
   create_resources('netdata::stream', $streams)
 
-  class { '::netdata::install': }
-  ~> class { '::netdata::config': }
-  ~> class { '::netdata::service': }
+  if $ensure == 'present' {
+    class { '::netdata::install': }
+    ~> class { '::netdata::config': }
+    ~> class { '::netdata::service': }
+  } elsif $ensure == 'absent' {
+    class { '::netdata::uninstall': }
+  }
 
 }
