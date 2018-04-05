@@ -14,6 +14,13 @@ describe 'netdata' do
         :selinux  => false,
       })
 
+      case facts[:operatingsystemrelease]
+        when /^(14|6)/
+          service_file = '/etc/init.d/netdata'
+      else
+          service_file = '/etc/systemd/system/netdata.service'
+      end
+
       let(:params) do
         {
         }.merge(overridden_params)
@@ -23,18 +30,17 @@ describe 'netdata' do
         let(:overridden_params) do {
         } end
 
-        it { 
-          should compile.with_all_deps
-	  is_expected.to contain_class('netdata::install')
-	  is_expected.to contain_class('netdata::config')
-	  is_expected.to contain_class('netdata::service')
-	  is_expected.to contain_exec('install')
-	  is_expected.to contain_service('netdata')
-          verify_concat_fragment_exact_contents(catalogue, 'stream.conf+01_includes', ['  enabled = no',])
-	  is_expected.to contain_file('/opt/netdata/etc/netdata/netdata.conf').with_content(/hostname = netdata.example.com/)
-	  is_expected.to contain_concat('/opt/netdata/etc/netdata/stream.conf')
-        }
-
+        it { should compile.with_all_deps }
+	it { is_expected.to contain_class('netdata::params') }
+	it { is_expected.to contain_class('netdata::install') }
+	it { is_expected.to contain_class('netdata::config') }
+	it { is_expected.to contain_class('netdata::service') }
+	it { is_expected.to contain_exec('install') }
+	it { is_expected.to contain_service('netdata') }
+        it { is_expected.to contain_file("#{service_file}").with('ensure' => 'present') }
+        it { verify_concat_fragment_exact_contents(catalogue, 'stream.conf+01_includes', ['  enabled = no',]) }
+	it { is_expected.to contain_file('/opt/netdata/etc/netdata/netdata.conf').with_content(/hostname = netdata.example.com/) }
+	it { is_expected.to contain_concat('/opt/netdata/etc/netdata/stream.conf') }
 
       end
     end

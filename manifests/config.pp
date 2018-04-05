@@ -10,6 +10,10 @@ class netdata::config {
   $web_files_dir        = "${::netdata::install_dir}${::netdata::web_files_dir}"
   $cache_dir            = "${::netdata::install_dir}${::netdata::cache_dir}"
   $log_dir              = "${::netdata::install_dir}${::netdata::log_dir}"
+  $service_filepath     = $::netdata::service_filepath
+  $service_filename     = $::netdata::service_filename
+  $service_filesrc      = $::netdata::service_filesrc
+  $service_filemode     = $::netdata::service_filemode
   $debug_flags          = $::netdata::debug_flags
   $memory_dedup         = $::netdata::memory_dedup
   $debug_log            = "${log_dir}/${::netdata::debug_logfile}"

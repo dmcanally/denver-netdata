@@ -4,9 +4,9 @@
 <% if @remote_master -%>
 
 [stream]
-    enabled = yes
-    destination = <%= @remote_master %>:<%= @remote_master_port %>
-    api key = <%= @remote_master_apikey %>
+  enabled = yes
+  destination = <%= @remote_master %>:<%= @remote_master_port %>
+  api key = <%= @remote_master_apikey %>
 
 <% else -%>
 

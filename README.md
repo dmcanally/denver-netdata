@@ -21,7 +21,7 @@
 
 ## Description
 
-This module deploys and configures netdata. More can be found on netdata at [firehol/netdata](https://github.com/firehol/netdata). 
+This module deploys and configures netdata. Netdata is a system for distributed real-time performance and health monitoring. More can be found on netdata at [firehol/netdata](https://github.com/firehol/netdata). 
 
 ## Setup
 
@@ -40,6 +40,7 @@ To remove a deployed netdata...
 ```puppet
 class {'::netdata': ensure => 'absent'}
 ```
+Note, `ensure => 'absent'` is not currently supported on Ubuntu 14.04 due to the way puppet manages upstart.
 
 ## Usage
 

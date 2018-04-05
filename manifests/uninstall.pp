@@ -1,17 +1,40 @@
 #class netdata::uninstall
 class netdata::uninstall {
 
-  $install_dir = $::netdata::install_dir
+  $service_filepath = $::netdata::service_filepath
+  $service_filename = $::netdata::service_filename
+  $netdata_cleanup = [
+    '/etc/netdata',
+    '/opt/netdata',
+    '/usr/sbin/netdata',
+    '/usr/share/netdata',
+    '/usr/libexec/netdata',
+    '/var/lib/netdata',
+    '/var/cache/netdata',
+    '/var/log/netdata',
+    '/etc/cron.daily/netdata-updater.sh',
+    "${service_filepath}/${service_filename}",
+  ]
 
-  exec {'uninstall':
-    path    => ['/bin','/sbin','/usr/bin','/usr/sbin'],
-    command => "${install_dir}/netdata-uninstaller.sh",
-    onlyif  => "ls ${install_dir}/netdata-uninstaller.sh",
+  service { 'netdata':
+    ensure => 'stopped',
+    enable => false,
   }
 
-  file { $install_dir:
-    ensure  => absent,
-    require => Exec['uninstall'],
+  file { $netdata_cleanup:
+    ensure  => 'absent',
+    force   => true,
+    require => Service['netdata'],
+  }
+
+  user { 'netdata':
+    ensure  => 'absent',
+    require => File[$netdata_cleanup],
+  }
+
+  group { 'netdata':
+    ensure  => 'absent',
+    require => User['netdata'],
   }
 
 }

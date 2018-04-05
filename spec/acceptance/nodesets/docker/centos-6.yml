@@ -11,7 +11,7 @@ HOSTS:
     docker_cmd: '["/sbin/init"]'
     docker_image_commands:
       - 'rm -rf /var/run/network/*'
-      - 'yum install -y crontabs bash curl'
+      - 'yum install -y crontabs initscripts iproute openssl sysvinit-tools tar wget which'
       - 'rm /etc/init/tty.conf'
 CONFIG:
   trace_limit: 200

@@ -197,6 +197,10 @@ class netdata (
   Stdlib::Absolutepath                            $web_files_dir        = '/usr/share/netdata/web',
   Stdlib::Absolutepath                            $cache_dir            = '/var/cache/netdata',
   Stdlib::Absolutepath                            $log_dir              = '/var/log/netdata',
+  Stdlib::Absolutepath                            $service_filepath     = $::netdata::params::service_filepath,
+  String                                          $service_filename     = $::netdata::params::service_filename,
+  String                                          $service_filesrc      = $::netdata::params::service_filesrc,
+  String                                          $service_filemode     = $::netdata::params::service_filemode,
   Optional[String]                                $debug_flags          = '0x00000000',
   Boolean                                         $memory_dedup         = true,
   String                                          $debug_logfile        = 'debug.log',
@@ -223,7 +227,7 @@ class netdata (
   Optional[String]                                $registry_allowfrom   = '*',
   Hash[String, Hash]                              $streams              = {},
 
-) {
+) inherits ::netdata::params {
 
   create_resources('netdata::stream', $streams)
 
@@ -232,7 +236,11 @@ class netdata (
     ~> class { '::netdata::config': }
     ~> class { '::netdata::service': }
   } elsif $ensure == 'absent' {
-    class { '::netdata::uninstall': }
+    if ($::operatingsystem == 'Ubuntu') and ($::operatingsystemrelease <= '14.10') {
+      notice("${::operatingsystem} ${::operatingsystemmajrelease} uninstall not supported")
+    } else {
+      class { '::netdata::uninstall': }
+    }
   }
 
 }
