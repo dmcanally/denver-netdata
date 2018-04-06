@@ -1,0 +1,11 @@
+<% if @type =~ /^(nginx|apache|gunicorn)$/ || @type.nil? -%>
+<%= @url %>:
+  name: '<%= @url %>'
+  path: '<%= @logfile %>'
+<% end -%>
+<% if @type =~ /^(apache_cache|squid)$/ -%>
+<%= @url %>:
+  name: '<%= @url %>'
+  type: '<%= @type %>'
+  path: '<%= @logfile %>'
+<% end -%>

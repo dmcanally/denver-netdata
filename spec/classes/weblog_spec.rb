@@ -26,7 +26,9 @@ describe 'netdata' do
         }.merge(overridden_params)
       end
 
-      describe "apply netdata on #{os}" do
+      let(:post_condition) { "netdata::plugin::web_log {'example.com': logfile => '/var/log/nginx/example.com.log' } "}
+
+      describe "apply netdata with web_log plugin on #{os}" do
         let(:overridden_params) do {
         } end
 
@@ -40,6 +42,13 @@ describe 'netdata' do
 	it { is_expected.to contain_service('netdata') }
         it { is_expected.to contain_file("#{service_file}").with('ensure' => 'present') }
         it { verify_concat_fragment_exact_contents(catalogue, 'stream.conf+01_includes', ['  enabled = no',]) }
+	it { should contain_concat('/opt/netdata/etc/netdata/python.d/web_log.conf') }
+        it { verify_concat_fragment_contents(catalogue, 'web_log.conf+01', /THIS FILE IS MANAGED BY PUPPET/) }
+	it { verify_concat_fragment_exact_contents(catalogue, 'web_log.conf+02_example.com', [
+            'example.com:',
+	    "  name: 'example.com'",
+            "  path: '/var/log/nginx/example.com.log'",
+        ]) }
 	it { is_expected.to contain_file('/opt/netdata/etc/netdata/netdata.conf').with_content(/hostname = netdata.example.com/) }
 	it { is_expected.to contain_concat('/opt/netdata/etc/netdata/stream.conf') }
 

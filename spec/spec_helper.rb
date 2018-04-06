@@ -59,7 +59,7 @@ end
 def verify_concat_fragment_contents(subject, title, expected_lines)
   is_expected.to contain_concat__fragment(title)
   content = subject.resource('concat::fragment', title).send(:parameters)[:content]
-  expect(content.split("\n") & expected_lines).to match_array(expected_lines)
+  expect(content.split("\n")).to include(expected_lines)
 end
 
 def verify_concat_fragment_exact_contents(subject, title, expected_lines)

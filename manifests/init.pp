@@ -226,6 +226,7 @@ class netdata (
   Optional[String]                                $registry_group       = undef,
   Optional[String]                                $registry_allowfrom   = '*',
   Hash[String, Hash]                              $streams              = {},
+  Hash[String, Hash]                              $web_log              = {},
 
 ) inherits ::netdata::params {
 
@@ -234,6 +235,7 @@ class netdata (
   if $ensure == 'present' {
     class { '::netdata::install': }
     ~> class { '::netdata::config': }
+    ~> class { '::netdata::plugin': }
     ~> class { '::netdata::service': }
   } elsif $ensure == 'absent' {
     if ($::operatingsystem == 'Ubuntu') and ($::operatingsystemrelease <= '14.10') {

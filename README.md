@@ -10,14 +10,15 @@
 #### Table of Contents
 
 1. [Description](#description)
-1. [Setup - The basics of getting started with netdata](#setup)
+1. [Setup](#setup)
     * [Setup requirements](#setup-requirements)
-    * [Beginning with netdata](#beginning-with-netdata)
 1. [Usage](#usage)
+    * [Basic usage](#basic-usage)
     * [Advanced usage](#advanced-use-cases)
+    * [Plugins](#plugins)
     * [Parameters](#parameters)
-1. [Limitations - OS compatibility, etc.](#limitations)
-1. [Development - Guide for contributing to the module](#development)
+1. [Limitations](#limitations)
+1. [Development](#development)
 
 ## Description
 
@@ -29,8 +30,9 @@ This module deploys and configures netdata. Netdata is a system for distributed 
 
 This module requires you have a compatible OS and a functioning puppet infrastructure.
 
-### Beginning with netdata
+## Usage
 
+### Basic  usage
 To deploy and configure default netdata...
 ```puppet
 class {'::netdata': }
@@ -42,9 +44,7 @@ class {'::netdata': ensure => 'absent'}
 ```
 Note, `ensure => 'absent'` is not currently supported on Ubuntu 14.04 due to the way puppet manages upstart.
 
-## Usage
-
-### Advanced use cases
+### Advanced useage
 To configure netdata as a Slave. Note, the GUID displayed here is just an example.
 ```puppet
 class {'::netdata':
@@ -52,7 +52,7 @@ class {'::netdata':
   remote_master_apikey => '9a83b18a-5cdb-4baf-8958-ad291ab781d3',
 }
 ```
-
+####`netdata::stream`
 To configure netdata as a Master
 ```puppet
 class {'::netdata':
@@ -74,120 +74,84 @@ class {'::netdata':
 
 netdata::stream {'9a83b18a-5cdb-4baf-8958-ad291ab781d3': }
 ```
+### Plugins
+####`netdata::plugin::web_log`
+This plugin supports apache, apache_cache, nginx, gunicorn, and squid. More [here](https://github.com/firehol/netdata/tree/master/python.d#web_log).
+```puppet
+netdata::plugin::web_log {'example.com'
+  logfile => '/var/log/nginx/example.com',
+}
+```
+  - `type`<br/>
+    Optional. Type of service generating the log file.<br/>
+  - `logfile`<br/>
+    Required. This should be the full path of the logfile being monitored.<br/>
 
-### Parameters
 
- * `history`
+### Class Parameters
 
-   Type:    Integer
-   Default: 3600
-   Desc:    The number of entries the netdata daemon will by default keep in memory for each chart dimension. 
+ * `history`<br/>
+   Default: 3600<br/>
+   Desc: The number of entries the netdata daemon will by default keep in memory for each chart dimension.<br/>
 
- * `debug_flags`
+ * `debug_flags`<br/>
+   Desc:    Debug Flags. See [more info](see https://github.com/firehol/netdata/wiki/Tracing-Options).<br/>
 
-   Type:    String
-   Default: 0x00000000
-   Desc:    Debug Flags. See [more info](see https://github.com/firehol/netdata/wiki/Tracing-Options).
+ * `memory_mode`<br/>
+   Default: save<br/>
+   Desc:    The mode for storing metrics. Options are save, map ram and none.<br/>
 
- * `debug_logfile`
+ * `web_mode`<br/>
+   Default: multi-threaded<br/>
+   Desc:    Web UI mode, options are none, single-threaded and multi-threaded.<br/>
 
-   Type:    String
-   Default: debug.log
-   Desc:    Debug log file
+ * `update_every`<br/>
+   Default: 1<br/>
+   Desc:    The frequency in seconds, for data collection.<br/>
 
- * `error_logfile`
+ * `port`<br/>
+   Default: 19999<br/>
+   Desc:    The default port to listen for web clients.<br/>
 
-   Type:    String
-   Default: error.log
-   Desc:    Error log file
+ * `bind_to`<br/>
+   Default: * <br/>
+   Desc:    The IPv4 address and port to listen to.<br/>
 
- * `access_logfile`
+ * `master`<br/>
+   Default: false<br/>
+   Desc:    Set this to true for netdata to act as a master.<br/>
 
-   Type:    String
-   Default: access.log
-   Desc:    Access Log File
+ * `remote_master`<br/>
+   Default: undef<br/>
+   Desc:    The Hostname of a remote netdata master.<br/>
 
- * `memory_mode`
+ * `remote_master_port`<br/>
+   Default: 19999<br/>
+   Desc:    Port for remote netdata master.<br/>
 
-   Type:    String
-   Default: save
-   Desc:    The mode for storing metrics. Options are save, map ram and none.
+ * `remote_master_apikey`<br/>
+   Default: undef<br/>
+   Desc:    This sets the API Key for talking to an upstream netdata. This must be a GUID. A netdata master must have a matching GUID defined with netdata::stream.<br/>
 
- * `web_mode`
-
-   Type:    String
-   Default: multi-threaded
-   Desc:    Web UI mode, options are none, single-threaded and multi-threaded.
-
- * `update_every`
-
-   Type:    Integer
-   Default: 1
-   Desc:    The frequency in seconds, for data collection.
-
- * `port`
-
-   Type:    Integer
-   Default: 19999
-   Desc:    The default port to listen for web clients.
-
- * `bind_to`
-
-   Type:    String
-   Default: *
-   Desc:    The IPv4 address and port to listen to.
-
- * `master`
-
-   Type:    Boolean
-   Default: false
-   Desc:    Set this to true for netdata to act as a master.
-
- * `remote_master`
-
-   Type:    String
-   Default: undef
-   Desc:    The Hostname of a remote netdata master.
-
- * `remote_master_port`
-
-   Type:    Integer
-   Default: 19999
-   Desc:    Port for remote netdata master.
-
- * `remote_master_apikey`
-
-   Type:    String
-   Default: undef
-   Desc:    This sets the API Key for talking to an upstream netdata. This must be a GUID. A netdata master must have a matching GUID defined with netdata::stream.
-
- * `registry`
-
-   Type:    Boolean
-   Default: false
-   Desc:    Set to true in order for a netdata to act as a registry.
+ * `registry`<br/>
+   Default: false<br/>
+   Desc:    Set to true in order for a netdata to act as a registry.<br/>
 
  * `registry_allowgroup`
+   Default: * <br/>
+   Desc:    List of subnets allowed to register.<br/>
 
-   Type:    String
-   Default: *
-   Desc:    List of subnets allowed to register.
+ * `remote_registry`<br/>
+   Default: undef<br/>
+   Desc:    A central netdata that is configured with `registry => true`.<br/>
 
- * `remote_registry`
-
-   Type:    String
-   Default: undef
-   Desc:    A central netdata that is configured with `registry => true`.
-
- * `remote_registry_port`
-
-   Type:    Integer
-   Default: 19999
-   Desc:    Port configured on the remote registry.
+ * `remote_registry_port`<br/>
+   Default: 19999<br/>
+   Desc:    Port configured on the remote registry.<br/>
 
 ## Limitations
 
-This module is tested with CentOS 6 and 7, Ubunu LTS 14.04, 16.04, and 18.04. There is no guarantee that this module will work for other operating systems.
+This module is tested with CentOS 6 and 7, Ubunu LTS 14.04, and 16.04. There is no guarantee that this module will work for other operating systems.
 
 ## Development
 
