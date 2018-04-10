@@ -34,4 +34,18 @@ class netdata::plugin {
     order   => '01',
   }
 
+  concat { "${config_dir}/python.d/bind_rndc.conf":
+    ensure  => $ensure,
+    owner   => $user,
+    group   => $group,
+    require => Class['::netdata::install'],
+    notify  => Service['netdata'],
+  }
+
+  concat::fragment { 'bind_rndc.conf+01':
+    target  => "${config_dir}/pyton.d/bind_rndc.conf",
+    content => template("${module_name}/plugin/bind_rndc.conf.erb"),
+    order   => '01',
+  }
+
 }

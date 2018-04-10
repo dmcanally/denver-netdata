@@ -52,7 +52,7 @@ class {'::netdata':
   remote_master_apikey => '9a83b18a-5cdb-4baf-8958-ad291ab781d3',
 }
 ```
-####`netdata::stream`
+`netdata::stream`
 To configure netdata as a Master
 ```puppet
 class {'::netdata':
@@ -75,17 +75,31 @@ class {'::netdata':
 netdata::stream {'9a83b18a-5cdb-4baf-8958-ad291ab781d3': }
 ```
 ### Plugins
-####`netdata::plugin::web_log`
-This plugin supports apache, apache_cache, nginx, gunicorn, and squid. More [here](https://github.com/firehol/netdata/tree/master/python.d#web_log).
+`netdata::plugin::bind_rndc` <br/>
+This plugin tracks bind rndc stats. More [here](https://github.com/firehol/netdata/tree/master/python.d#bind_rndc). <br/>
 ```puppet
-netdata::plugin::web_log {'example.com'
+netdata::plugin::bind_rndc {'example.com': }
+```
+ * `update` <br/>
+   Optional. Data collection frequency. <br/>
+ * `priority` <br/>
+   Optional. Order of the dashboard. <br/>
+ * `retries` <br/>
+   Optional. Number of restoration attempts. <br/>
+ * `detect_retry`<br/>
+   Optional. re-detect interval in seconds. <br/>
+
+`netdata::plugin::web_log` <br/>
+This plugin supports apache, apache_cache, nginx, gunicorn, and squid. More [here](https://github.com/firehol/netdata/tree/master/python.d#web_log). <br/>
+```puppet
+netdata::plugin::web_log {'example.com':
   logfile => '/var/log/nginx/example.com',
 }
 ```
-  - `type`<br/>
-    Optional. Type of service generating the log file.<br/>
-  - `logfile`<br/>
-    Required. This should be the full path of the logfile being monitored.<br/>
+ * `type` <br/>
+   Optional. Type of service generating the log file. <br/>
+ * `logfile` <br/>
+    Required. This should be the full path of the logfile being monitored. <br/>
 
 
 ### Class Parameters
