@@ -1,6 +1,6 @@
 require 'spec_helper_acceptance'
 
-describe 'Simple installation' do
+describe 'web_log plugin test' do
 
   hostname = fact('hostname')
 

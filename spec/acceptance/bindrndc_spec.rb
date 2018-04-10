@@ -1,6 +1,6 @@
 require 'spec_helper_acceptance'
 
-describe 'basic installation' do
+describe 'bind_rndc plugin test' do
 
   hostname = fact('hostname')
 
@@ -8,6 +8,7 @@ describe 'basic installation' do
     <<-EOS
 
     class { '::netdata': }
+    netdata::plugin::bind_rndc {'example.com': }
 
     EOS
   end
@@ -26,5 +27,10 @@ describe 'basic installation' do
   describe file('/opt/netdata/etc/netdata/netdata.conf') do
     it { is_expected.to contain(/hostname = #{hostname}/)}
   end
+
+  describe file('/opt/netdata/etc/netdata/python.d/bind_rndc.conf') do
+    it { is_expected.to contain(/example\.com/)}
+  end
+
 
 end

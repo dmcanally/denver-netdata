@@ -1,6 +1,6 @@
 require 'spec_helper_acceptance'
 
-describe 'Simple uninstall' do
+describe 'uninstall' do
 
   let :pre_condition do
     "class { '::netdata': }"
