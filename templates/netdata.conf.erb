@@ -45,5 +45,5 @@
 <% end -%>
 <% if @remote_registry -%>
   registry to announce = http://<%= @remote_registry %>:<%= @remote_registry_port %>
-  registry hostname = <% if @registry_group %><%= @registry_group %>: <% end %><%= @hostname %>
+  registry hostname = <% if @registry_group %><%= @registry_group %>: <% end %><%= @fqdn %>
 <% end -%>
