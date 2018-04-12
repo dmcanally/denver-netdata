@@ -29,7 +29,7 @@ class netdata::plugin {
   }
 
   concat::fragment { 'web_log.conf+01':
-    target  => "${config_dir}/pyton.d/web_log.conf",
+    target  => "${config_dir}/python.d/web_log.conf",
     content => template("${module_name}/plugin/web_log.conf.erb"),
     order   => '01',
   }
@@ -43,7 +43,7 @@ class netdata::plugin {
   }
 
   concat::fragment { 'bind_rndc.conf+01':
-    target  => "${config_dir}/pyton.d/bind_rndc.conf",
+    target  => "${config_dir}/python.d/bind_rndc.conf",
     content => template("${module_name}/plugin/bind_rndc.conf.erb"),
     order   => '01',
   }

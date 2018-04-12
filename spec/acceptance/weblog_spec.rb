@@ -29,6 +29,7 @@ describe 'web_log plugin test' do
   end
 
   describe file('/opt/netdata/etc/netdata/python.d/web_log.conf') do
+    it { is_expected.to contain(/THIS FILE IS MANAGED BY PUPPET/)}
     it { is_expected.to contain(/example\.com/)}
   end
 
