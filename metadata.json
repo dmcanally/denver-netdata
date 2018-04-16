@@ -2,7 +2,7 @@
   "name": "denver-netdata",
   "version": "0.1.7",
   "author": "denver.mcanally@gmail.com",
-  "summary": "Deploys and Configures netdata",
+  "summary": "Deploys and Configures netdata.",
   "license": "Apache-2.0",
   "source": "https://github.com/dmcanally/denver-netdata",
   "project_page": "https://github.com/dmcanally/denver-netdata",
