@@ -30,7 +30,7 @@ describe 'netdata::stream' do
             '  default history = 3600',
             '  default memory mode = save',
             '  health enabled by default = auto',
-            "  allow from = '*'",
+            "  allow from = *",
           ])
         }
       end
