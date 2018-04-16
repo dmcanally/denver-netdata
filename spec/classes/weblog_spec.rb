@@ -41,7 +41,7 @@ describe 'netdata' do
 	it { is_expected.to contain_exec('install') }
 	it { is_expected.to contain_service('netdata') }
         it { is_expected.to contain_file("#{service_file}").with('ensure' => 'present') }
-        it { verify_concat_fragment_exact_contents(catalogue, 'stream.conf+01_includes', ['  enabled = no',]) }
+        it { verify_concat_fragment_exact_contents(catalogue, 'stream.conf+01_includes', ['[stream]','  enabled = no',]) }
 	it { should contain_concat('/opt/netdata/etc/netdata/python.d/web_log.conf') }
         it { verify_concat_fragment_contents(catalogue, 'web_log.conf+01', /THIS FILE IS MANAGED BY PUPPET/) }
 	it { verify_concat_fragment_exact_contents(catalogue, 'web_log.conf+02_example.com', [
