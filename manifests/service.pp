@@ -3,6 +3,7 @@ class netdata::service {
 
   $ensure               = $::netdata::ensure
   $install_dir          = $::netdata::install_dir
+  $install_method       = $::netdata::install_method
   $service_filepath     = $::netdata::service_filepath
   $service_filename     = $::netdata::service_filename
   $service_filesrc      = $::netdata::service_filesrc
@@ -19,9 +20,11 @@ class netdata::service {
     notify => Service['netdata'],
   }
 
-  file { "${service_filepath}/${service_filename}":
-    source => "${install_dir}/system/${service_filesrc}",
-    mode   => $service_filemode,
+  unless ($install_method == 'pkg') {
+    file { "${service_filepath}/${service_filename}":
+      source => "${install_dir}/system/${service_filesrc}",
+      mode   => $service_filemode,
+    }
   }
 
   service {'netdata':

@@ -37,5 +37,4 @@ class netdata::params {
       fail("${::hostname}: This module does not support ${::osfamily} - ${::operatingsystem} ${::operatingsystemrelease}")
     }
   }
-
 }

@@ -17,12 +17,22 @@
 # * `history`
 #   Type:    Integer
 #   Default: 3600
-#   Desc:    The number of entries the netdata daemon will by default keep in memory for each chart dimension. 
+#   Desc:    The number of entries the netdata daemon will by default keep in memory for each chart dimension.
 #
 # * `install_dir`
 #   Type:    String
 #   Default: /opt/netdata
 #   Desc:    Path in which to deploy netdata locally.
+#
+# * `install_method`
+#   Type:    String
+#   Default: curl
+#   Desc:    Method to use to install netdata.  Options are 'curl' (default) and 'pkg'.
+#
+# * `package_names`
+#   Type:    Array
+#   Default: ['netdata']
+#   Desc:    Names of package(s) used to install netdata.  You need to take care of building packages and adding them to repos yourself
 #
 # * `config_dir`
 #   Type:    String
@@ -191,7 +201,9 @@ class netdata (
   String                                          $version              = 'latest',
   Optional[String]                                $hostname             = undef,
   Integer                                         $history              = 3600,
-  Stdlib::Absolutepath                            $install_dir          = '/opt/netdata',
+  Optional[Stdlib::Absolutepath]                  $install_dir          = '/opt/netdata',
+  Enum['curl', 'pkg']                             $install_method       = 'curl',
+  Array[String]                                   $package_names        = ['netdata'],
   Stdlib::Absolutepath                            $config_dir           = '/etc/netdata',
   Stdlib::Absolutepath                            $plugins_dir          = '/usr/libexec/netdata/plugins.d',
   Stdlib::Absolutepath                            $web_files_dir        = '/usr/share/netdata/web',

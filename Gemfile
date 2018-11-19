@@ -13,6 +13,7 @@ gem 'beaker', '>= 3.9.0', {"groups"=>["system_tests"]}
 gem 'beaker-rspec', {"groups"=>["system_tests"]}
 gem 'beaker-module_install_helper', {"groups"=>["system_tests"]}
 gem 'beaker-puppet_install_helper', {"groups"=>["system_tests"]}
+gem 'beaker-docker'
 
 # rspec must be v2 for ruby 1.8.7
 if RUBY_VERSION >= '1.8.7' && RUBY_VERSION < '1.9'
