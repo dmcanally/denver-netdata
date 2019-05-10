@@ -30,6 +30,19 @@ class netdata::params {
             $service_filemode = '0644'
           }
         }
+        'Debian': {
+          if $::operatingsystemmajrelease <= '7.11' {
+            $service_filepath = '/etc/init.d'
+            $service_filename = 'netdata'
+            $service_filesrc  = 'netdata-lsb'
+            $service_filemode = '0755'
+          } else {
+            $service_filepath = '/etc/systemd/system'
+            $service_filename = 'netdata.service'
+            $service_filesrc  = 'netdata.service'
+            $service_filemode = '0644'
+          }
+        }
         default: {fail("${::hostname}: This module does not support ${::osfamily} - ${::operatingsystem} ${::operatingsystemrelease}")}
       }
     }
