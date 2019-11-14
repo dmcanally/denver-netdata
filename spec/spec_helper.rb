@@ -1,6 +1,3 @@
-# This file is managed centrally by modulesync
-#   https://github.com/theforeman/foreman-installer-modulesync
-
 # Add coveralls support
 require 'coveralls'
 Coveralls.wear!

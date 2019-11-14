@@ -3,7 +3,7 @@
 # https://github.com/voxpupuli/modulesync
 # https://github.com/theforeman/foreman-installer-modulesync
 HOSTS:
-  centos-7-x64.example.com:
+  centos7.example.spec:
     platform: el-7-x86_64
     hypervisor: docker
     image: centos:7
@@ -11,6 +11,7 @@ HOSTS:
     docker_cmd: '["/usr/sbin/init"]'
     docker_image_commands:
       - 'yum install -y crontabs initscripts iproute openssl sysvinit-tools tar wget which ss'
+      - 'yum install -y epel-release'
       - 'systemctl mask getty@tty1.service'
 CONFIG:
   trace_limit: 200

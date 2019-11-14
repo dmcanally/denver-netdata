@@ -169,6 +169,13 @@ This module is tested with CentOS 6 and 7, Ubunu LTS 14.04, and 16.04. There is 
 
 ## Development
 
+To execute acceptance tests...
+```bash
+PUPPET_INSTALL_TYPE=agent BEAKER_PUPPET_COLLECTION=puppet5 BEAKER_debug=true BEAKER_set=docker/centos-7 bundle exec rake beaker
+PUPPET_INSTALL_TYPE=agent BEAKER_PUPPET_COLLECTION=puppet5 BEAKER_debug=true BEAKER_set=docker/ubuntu-18.04 bundle exec rake beaker
+```
+For this to work you must have docker installed and running locally
+
 This module is currently maintained by Denver McAnally (denver.mcanally@gmail.com). Please feel free to contribute. When doing so, please be sure to provide appropriate test coverage.
 Please see puppetlabs [contribution guide](https://docs.puppetlabs.com/forge/contributing.html) for more information. 
 

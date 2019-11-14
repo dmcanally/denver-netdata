@@ -1,42 +1,30 @@
----
 rvm:
-  - 2.1.9
-  - 2.2.6
-  - 2.3.0
-  - 2.4.1
+- 2.6.3
 env:
   matrix:
-    - PUPPET_VERSION=4.9
+  - PUPPET_VERSION=5.0
 script: bundle exec rake test
 matrix:
   fast_finish: true
   include:
-    - rvm: 2.4.1
-      env: PUPPET_VERSION=5.0
-    # Acceptance tests
-    - rvm: 2.3.1
-      dist: trusty
-      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_set=docker/centos-6
-      script: bundle exec rake beaker
-      services: docker
-      bundler_args: --without development
-    - rvm: 2.3.1
-      dist: trusty
-      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_set=docker/centos-7
-      script: bundle exec rake beaker
-      services: docker
-      bundler_args: --without development
-    - rvm: 2.3.1
-      dist: trusty
-      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_set=docker/ubuntu-14.04
-      script: bundle exec rake beaker
-      services: docker
-      bundler_args: --without development
-    - rvm: 2.3.1
-      dist: trusty
-      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_set=docker/ubuntu-16.04
-      script: bundle exec rake beaker
-      services: docker
-      bundler_args: --without development
-bundler_args: --without system_tests development
+  - rvm: 2.6.3
+    env: PUPPET_VERSION=5.0
+  - rvm: 2.6.3
+    dist: trusty
+    env: PUPPET_INSTALL_TYPE=agent BEAKER_PUPPET_COLLECTION=puppet5 BEAKER_debug=true
+      BEAKER_set=docker/centos-7
+    script: bundle exec rake beaker
+    services: docker
+    bundler_args: "--without development"
+  - rvm: 2.6.3
+    dist: trusty
+    env: PUPPET_INSTALL_TYPE=agent BEAKER_PUPPET_COLLECTION=puppet5 BEAKER_debug=true
+      BEAKER_set=docker/ubuntu-18.04
+    script: bundle exec rake beaker
+    services: docker
+    bundler_args: "--without development"
+bundler_args: "--without system_tests development"
 sudo: false
+notifications:
+  slack:
+    secure: WGW+ZpZyssFZL3IAVNKTzEzigNSJtjj6uI0Qcbh+45YOXJatk62Pwc5eHWTh+hdfSgixm0BvfzbbzIDFSCXtcdc0YViZHVJvjYIWSoMkdtzfnhGJWcjjBAn5N1nR+RCKN7sFQDlBbCRSY0a9YXDibRYDmXj3ddgofgavLZq6TQHvsPySdybtPFzaBOnwkXbnO4z/4YD890a2xMDLBbK4Bubc2+NC8jJfBOLAcjnZurVrSG8+y6IQpgqJMSiiu2qwpuN9GcWWpSrehRbqiUg6vZg29oz02Vak38/KaYfxy4XWkP7VSg2F3tN520ARvSrvbjVGKGq0Praz/LKxJupzqp8T0ON3hA/KVefTvkRaU1xDJOq4YdqyxbgBls5w2a4MW01Rsd3b+qvfK7KRD3rjMwXGKiPdV4tOlm6alOMgvutpyrBcoE5Mz2RZPBg5qT+6ZwoDvHBaL9Fyb1xv6q2qzMGxkaSUSD0D/+TMTV5WFi7Pbu+DWAUxXXEjuANrwOx9/PxpY+CwyEU0SL7GVWzPpIkumgN99mprNHbRJI7cYLbtuKJaRg/GYHTlD//U+rI8QJWs8O2za4OvytFetiIN6HlKrnxdlbWzNCZK+qZbJCN83o/x5BwkfEbUVAzVVuSc37ga2a7R2iRbl0V2vodmDwWNCEOR73E470E+hlvs6ns=
