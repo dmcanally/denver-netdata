@@ -198,6 +198,7 @@
 class netdata (
 
   Enum['present', 'absent']                       $ensure               = 'present',
+  Enum['YES', 'NO']                               $alerting             = 'NO',
   String                                          $version              = 'latest',
   Optional[String]                                $hostname             = undef,
   Integer                                         $history              = 3600,

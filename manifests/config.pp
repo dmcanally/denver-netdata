@@ -39,6 +39,7 @@ class netdata::config {
   $registry_group       = $::netdata::registry_group
   $registry_allowfrom   = $::netdata::registry_allowfrom
   $streams              = $::netdata::streams
+  $alerting             = $::netdata::alerting
 
   File {
     ensure => $ensure,
@@ -65,6 +66,12 @@ class netdata::config {
     target  => "${config_dir}/stream.conf",
     content => template("${module_name}/stream.conf.erb"),
     order   => '01',
+  }
+
+  file_line {'SEND_EMAIL':
+    path  => '/opt/netdata/usr/lib/netdata/conf.d/health_alarm_notify.conf',
+    line  => "SEND_EMAIL=\"${alerting}\"",
+    match => '^SEND_EMAIL=\".*\"',
   }
 
 }
