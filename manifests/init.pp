@@ -219,7 +219,7 @@ class netdata (
   String                                          $debug_logfile        = 'debug.log',
   String                                          $error_logfile        = 'error.log',
   String                                          $access_logfile       = 'access.log',
-  Enum['save', 'map', 'ram','none']               $memory_mode          = 'save',
+  Enum['dbengine', 'save', 'map', 'ram','none']   $memory_mode          = 'save',
   Enum['none','single-threaded','multi-threaded'] $web_mode             = 'multi-threaded',
   Integer                                         $update_every         = 1,
   String                                          $web_user             = 'netdata',
