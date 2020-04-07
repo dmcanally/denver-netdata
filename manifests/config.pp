@@ -54,6 +54,15 @@ class netdata::config {
     content => template("${module_name}/netdata.conf.erb"),
   }
 
+  if $::netdata::unix_socket_dir {
+    file { $::netdata::unix_socket_dir:
+      ensure => directory,
+      owner  => $user,
+      group  => $group,
+      mode   => '0750';
+    }
+  }
+
   concat { "${config_dir}/stream.conf":
     ensure  => $ensure,
     owner   => $user,

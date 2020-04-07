@@ -174,6 +174,12 @@
 #   Default: 19999
 #   Desc:    Port configured on the remote registry.
 #
+# * `unix_socket_dir`
+#   Type:    Optional[Stdlib::Absolutepath
+#   Default: undef
+#   Desc:    Directory where the unix socket will be created
+#
+#
 # Examples
 # --------
 #
@@ -240,6 +246,7 @@ class netdata (
   Optional[String]                                $registry_allowfrom   = '*',
   Hash[String, Hash]                              $streams              = {},
   Hash[String, Hash]                              $web_log              = {},
+  Optional[Stdlib::Absolutepath]                  $unix_socket_dir      = undef,
 
 ) inherits ::netdata::params {
 
