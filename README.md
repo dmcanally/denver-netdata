@@ -22,7 +22,7 @@
 
 ## Description
 
-This module deploys and configures netdata. Netdata is a system for distributed real-time performance and health monitoring. More can be found on netdata at [firehol/netdata](https://github.com/firehol/netdata). 
+This module deploys and configures netdata. Netdata is a system for distributed real-time performance and health monitoring. More can be found on the [netdata website](https://www.netdata.cloud/).
 
 ## Setup
 
@@ -59,7 +59,7 @@ class {'::netdata':
   master => true,
 }
 ```
-In order for netdata metrics to stream to a master, you must define a netdata stream API key. You can generate a GUID with uuidgen. More information can be found on netdata replication [here](https://github.com/firehol/netdata/wiki/Replication-Overview).
+In order for netdata metrics to stream to a master, you must define a netdata stream API key. You can generate a GUID with uuidgen. More information can be found on netdata replication [here](https://docs.netdata.cloud/streaming/).
 ```puppet
 netdata::stream {'9a83b18a-5cdb-4baf-8958-ad291ab781d3': }
 ```
@@ -76,7 +76,7 @@ netdata::stream {'9a83b18a-5cdb-4baf-8958-ad291ab781d3': }
 ```
 ### Plugins
 `netdata::plugin::bind_rndc` <br/>
-This plugin tracks bind rndc stats. More [here](https://github.com/firehol/netdata/tree/master/python.d#bind_rndc). <br/>
+This plugin tracks bind rndc stats. More [here](https://docs.netdata.cloud/collectors/python.d.plugin/bind_rndc/). <br/>
 ```puppet
 netdata::plugin::bind_rndc {'example.com': }
 ```
@@ -90,7 +90,7 @@ netdata::plugin::bind_rndc {'example.com': }
    Optional. re-detect interval in seconds. <br/>
 
 `netdata::plugin::web_log` <br/>
-This plugin supports apache, apache_cache, nginx, gunicorn, and squid. More [here](https://github.com/firehol/netdata/tree/master/python.d#web_log). <br/>
+This plugin supports apache, apache_cache, nginx, gunicorn, and squid. More [here](https://docs.netdata.cloud/collectors/python.d.plugin/web_log/). <br/>
 ```puppet
 netdata::plugin::web_log {'example.com':
   logfile => '/var/log/nginx/example.com',
@@ -109,7 +109,7 @@ netdata::plugin::web_log {'example.com':
    Desc: The number of entries the netdata daemon will by default keep in memory for each chart dimension.<br/>
 
  * `debug_flags`<br/>
-   Desc:    Debug Flags. See [more info](see https://github.com/firehol/netdata/wiki/Tracing-Options).<br/>
+   Desc:    Debug Flags. See [more info](https://docs.netdata.cloud/daemon/#debugging).<br/>
 
  * `memory_mode`<br/>
    Default: save<br/>
@@ -179,4 +179,4 @@ For this to work you must have docker installed and running locally
 This module is currently maintained by Denver McAnally (denver.mcanally@gmail.com). Please feel free to contribute. When doing so, please be sure to provide appropriate test coverage.
 Please see puppetlabs [contribution guide](https://docs.puppetlabs.com/forge/contributing.html) for more information. 
 
-Netdata is developed and maintained at [firehol/netdata](https://github.com/firehol/netdata).
+Netdata is developed and maintained at [netdata/netdata](https://github.com/netdata/netdata).

@@ -1,7 +1,7 @@
 # Class: netdata
 # ===========================
 #
-# This module deploys and configures netdata. More on netdata here (https://github.com/firehol/netdata).
+# This module deploys and configures netdata. More on netdata here (https://github.com/netdata/netdata).
 #
 # Parameters
 # ----------
@@ -62,7 +62,7 @@
 # * `debug_flags`
 #   Type:    String
 #   Default: 0x00000000
-#   Desc:    Debug Flags (see https://github.com/firehol/netdata/wiki/Tracing-Options)
+#   Desc:    Debug Flags (see https://docs.netdata.cloud/daemon/#debugging)
 #
 # * `memory_dedup`
 #   Type:    Boolean
