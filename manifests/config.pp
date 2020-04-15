@@ -78,7 +78,7 @@ class netdata::config {
   }
 
   file_line {'SEND_EMAIL':
-    path  => "${::netdata::install_dir}/usr/lib/netdata/conf.d/health_alarm_notify.conf',
+    path  => "${::netdata::install_dir}/usr/lib/netdata/conf.d/health_alarm_notify.conf",
     line  => "SEND_EMAIL=\"${alerting}\"",
     match => '^SEND_EMAIL=\".*\"',
   }
