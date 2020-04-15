@@ -15,13 +15,12 @@ RSpec.configure do |c|
   c.before :suite do
     # Install module and dependencies
     hosts.each do |host|
-      if fact_on(host, 'osfamily') == 'RedHat'
-        # don't delete downloaded rpm for use with BEAKER_provision=no +
-        # BEAKER_destroy=no
-        on host, 'sed -i "s/keepcache=.*/keepcache=1/" /etc/yum.conf'
-        # refresh check if cache needs refresh on next yum command
-        on host, 'yum clean expire-cache'
-      end
+      next unless fact_on(host, 'osfamily') == 'RedHat'
+      # don't delete downloaded rpm for use with BEAKER_provision=no +
+      # BEAKER_destroy=no
+      on host, 'sed -i "s/keepcache=.*/keepcache=1/" /etc/yum.conf'
+      # refresh check if cache needs refresh on next yum command
+      on host, 'yum clean expire-cache'
     end
   end
 end
