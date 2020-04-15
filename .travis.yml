@@ -1,30 +1,51 @@
+---
+os: linux
+dist: xenial
+language: ruby
+cache: bundler
+before_install:
+  - bundle -v
+  - rm -f Gemfile.lock
+  - "# Update system gems if requested. This is useful to temporarily workaround troubles in the test runner"
+  - "# See https://github.com/puppetlabs/pdk-templates/commit/705154d5c437796b821691b707156e1b056d244f for an example of how this was used"
+  - "# Ignore exit code of SIGPIPE'd yes to not fail with shell's pipefail set"
+  - '[ -z "$RUBYGEMS_VERSION" ] || (yes || true) | gem update --system $RUBYGEMS_VERSION'
+  - gem --version
+  - bundle -v
+script:
+  - 'bundle exec rake $CHECK'
+bundler_args: --without system_tests
 rvm:
-- 2.6.3
-env:
-  matrix:
-  - PUPPET_VERSION=5.0
-script: bundle exec rake test
-matrix:
+  - 2.5.7
+stages:
+  - static
+  - spec
+  - acceptance
+  -
+    if: tag =~ ^v\d
+    name: deploy
+jobs:
   fast_finish: true
   include:
-  - rvm: 2.6.3
-    env: PUPPET_VERSION=5.0
-  - rvm: 2.6.3
-    dist: trusty
-    env: PUPPET_INSTALL_TYPE=agent BEAKER_PUPPET_COLLECTION=puppet5 BEAKER_debug=true
-      BEAKER_set=docker/centos-7
-    script: bundle exec rake beaker
-    services: docker
-    bundler_args: "--without development"
-  - rvm: 2.6.3
-    dist: trusty
-    env: PUPPET_INSTALL_TYPE=agent BEAKER_PUPPET_COLLECTION=puppet5 BEAKER_debug=true
-      BEAKER_set=docker/ubuntu-18.04
-    script: bundle exec rake beaker
-    services: docker
-    bundler_args: "--without development"
-bundler_args: "--without system_tests development"
-sudo: false
+    -
+      env: CHECK="check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint"
+      stage: static
+    -
+      env: PUPPET_GEM_VERSION="~> 5.0" CHECK=parallel_spec
+      rvm: 2.4.5
+      stage: spec
+    -
+      env: PUPPET_GEM_VERSION="~> 6.0" CHECK=parallel_spec
+      rvm: 2.5.7
+      stage: spec
+    -
+      env: DEPLOY_TO_FORGE=yes
+      stage: deploy
+branches:
+  only:
+    - master
+    - /^v\d/
 notifications:
+  email: false
   slack:
     secure: WGW+ZpZyssFZL3IAVNKTzEzigNSJtjj6uI0Qcbh+45YOXJatk62Pwc5eHWTh+hdfSgixm0BvfzbbzIDFSCXtcdc0YViZHVJvjYIWSoMkdtzfnhGJWcjjBAn5N1nR+RCKN7sFQDlBbCRSY0a9YXDibRYDmXj3ddgofgavLZq6TQHvsPySdybtPFzaBOnwkXbnO4z/4YD890a2xMDLBbK4Bubc2+NC8jJfBOLAcjnZurVrSG8+y6IQpgqJMSiiu2qwpuN9GcWWpSrehRbqiUg6vZg29oz02Vak38/KaYfxy4XWkP7VSg2F3tN520ARvSrvbjVGKGq0Praz/LKxJupzqp8T0ON3hA/KVefTvkRaU1xDJOq4YdqyxbgBls5w2a4MW01Rsd3b+qvfK7KRD3rjMwXGKiPdV4tOlm6alOMgvutpyrBcoE5Mz2RZPBg5qT+6ZwoDvHBaL9Fyb1xv6q2qzMGxkaSUSD0D/+TMTV5WFi7Pbu+DWAUxXXEjuANrwOx9/PxpY+CwyEU0SL7GVWzPpIkumgN99mprNHbRJI7cYLbtuKJaRg/GYHTlD//U+rI8QJWs8O2za4OvytFetiIN6HlKrnxdlbWzNCZK+qZbJCN83o/x5BwkfEbUVAzVVuSc37ga2a7R2iRbl0V2vodmDwWNCEOR73E470E+hlvs6ns=
