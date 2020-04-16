@@ -24,11 +24,11 @@ describe 'netdata::plugin::web_log' do
         facts[:selinux] = false
 
         it {
-          verify_concat_fragment_exact_contents(catalogue, 'web_log.conf+02_example.com', [
-                                                  'example.com:',
-                                                  "  name: 'example.com'",
-                                                  "  path: '/var/log/nginx/example.com'",
-                                                ])
+          contain_concat_fragment(catalogue, 'web_log.conf+02_example.com', [
+                                    'example.com:',
+                                    "  name: 'example.com'",
+                                    "  path: '/var/log/nginx/example.com'",
+                                  ])
         }
       end
     end

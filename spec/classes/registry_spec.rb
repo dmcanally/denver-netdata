@@ -28,7 +28,7 @@ describe 'netdata' do
         it { is_expected.to contain_class('netdata::config') }
         it { is_expected.to contain_exec('install') }
         it { is_expected.to contain_service('netdata') }
-        # it { verify_concat_fragment_exact_contents(catalogue, 'stream.conf+01_includes', ['[stream]','  enabled = no',]) }
+        it { contain_concat_fragment(catalogue, 'stream.conf+01_includes', ['[stream]', '  enabled = no']) }
         it { is_expected.to contain_file('/opt/netdata/etc/netdata/netdata.conf').with_content(%r{\[registry\]\n  enabled = yes}) }
         it { is_expected.to contain_concat('/opt/netdata/etc/netdata/stream.conf') }
       end

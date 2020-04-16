@@ -37,10 +37,10 @@ describe 'netdata' do
         it { is_expected.to contain_exec('install') }
         it { is_expected.to contain_service('netdata') }
         it { is_expected.to contain_file(service_file.to_s).with('ensure' => 'present') }
-        # it { verify_concat_fragment_exact_contents(catalogue, 'stream.conf+01_includes', ['[stream]','  enabled = no',]) }
+        it { contain_concat_fragment(catalogue, 'stream.conf+01_includes', ['[stream]', '  enabled = no']) }
         it { is_expected.to contain_file('/opt/netdata/etc/netdata/netdata.conf').with_content(%r{hostname = netdata.example.com}) }
         it { is_expected.to contain_concat('/opt/netdata/etc/netdata/stream.conf') }
-        # it { verify_concat_fragment_contents(catalogue, 'web_log.conf+01', /THIS FILE IS MANAGED BY PUPPET/) }
+        it { contain_concat_fragment(catalogue, 'web_log.conf+01', %r{THIS FILE IS MANAGED BY PUPPET}) }
       end
     end
   end

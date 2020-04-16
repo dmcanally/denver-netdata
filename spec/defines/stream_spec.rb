@@ -23,14 +23,14 @@ describe 'netdata::stream' do
         facts[:selinux] = false
 
         it {
-          verify_concat_fragment_exact_contents(catalogue, 'stream.conf+10_9a83b18a-5cdb-4baf-8958-ad291ab781d3', [
-                                                  '[9a83b18a-5cdb-4baf-8958-ad291ab781d3]',
-                                                  '  enabled = yes',
-                                                  '  default history = 3600',
-                                                  '  default memory mode = save',
-                                                  '  health enabled by default = auto',
-                                                  '  allow from = *',
-                                                ])
+          contain_concat_fragment(catalogue, 'stream.conf+10_9a83b18a-5cdb-4baf-8958-ad291ab781d3', [
+                                    '[9a83b18a-5cdb-4baf-8958-ad291ab781d3]',
+                                    '  enabled = yes',
+                                    '  default history = 3600',
+                                    '  default memory mode = save',
+                                    '  health enabled by default = auto',
+                                    '  allow from = *',
+                                  ])
         }
       end
     end

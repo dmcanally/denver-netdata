@@ -35,12 +35,14 @@ describe 'netdata' do
         it { is_expected.to contain_class('netdata::service') }
         it { is_expected.to contain_exec('install') }
         it { is_expected.to contain_service('netdata') }
-        # it { verify_concat_fragment_exact_contents(catalogue, 'stream.conf+01_includes', [
-        #  '[stream]',
-        #  '  enabled = yes',
-        #  '  api key = 9a83b18a-5cdb-4baf-8958-ad291ab781d3',
-        #  '  destination = netdata-master.example.com:19999',
-        # ]) }
+        it {
+          contain_concat_fragment(catalogue, 'stream.conf+01_includes', [
+                                    '[stream]',
+                                    '  enabled = yes',
+                                    '  api key = 9a83b18a-5cdb-4baf-8958-ad291ab781d3',
+                                    '  destination = netdata-master.example.com:19999',
+                                  ])
+        }
         it { is_expected.to contain_file('/opt/netdata/etc/netdata/netdata.conf').with_content(%r{memory mode = none}) }
         it { is_expected.to contain_file('/opt/netdata/etc/netdata/netdata.conf').with_content(%r{registry hostname = office1}) }
         it { is_expected.to contain_concat('/opt/netdata/etc/netdata/stream.conf') }
